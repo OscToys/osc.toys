@@ -1,0 +1,134 @@
+# OscGoesBrrr Settings
+
+## Force a toy to only link with a certain penetrator / orifice
+
+By default, OscGoesBrrr will bind all devices to all orifices and penetrators. You can force a device to only bind to one or the other by setting `<deviceId>.type` to `orf` or `pen`. Alternatively, you can set `<deviceId>.id` to the ID name of the penetrator or orifice if you only want one specific one. You can get the deviceId from the `Intiface Status` panel while the device is connected!
+
+Example (bind the lovensehush-0 device to the `OGB/Orf/Hips` and `OGB/Orf/LHand` orifice):
+```
+lovensehush-0.id=Hips,LHand
+```
+
+Example (bind the lovensehush-0 device to all orifices, but no penetrators):
+```
+lovensehush-0.type=orf
+```
+
+## Vibrate based on motion instead of depth
+
+OSCGoesBrrr currently vibrates with intensity based on depth. If you prefer it to vibrate based on motion instead, you can set `linear` to 0.
+
+Example:
+```
+all.linear=0
+```
+
+Only want one device to use motion-based instead of all? Swap the lovensehush-0 device to your device name:
+```
+lovensehush-0.linear=0
+```
+
+## Enable Self-Interaction / Enable or Disable certain features
+
+OSCGoesBrrr supports many features that can activate your toy. Those features are:
+* `touchOthers` - Activates someone else touches your oriface or penetrator using their hand, fingers, feet, head or torso
+* `penOthers` - Activates when you penetrate or are penetrated by someone else
+* `frotOthers` - Activates when you rub your penetrator against someone else's penetrator, or orifice against someone else's orifice
+* `touchSelf` - DISABLED BY DEFAULT - Activates when you touch your oriface or penetrator using your hand, fingers, or feet
+* `penSelf` - DISABLED BY DEFAULT - Activates when you penetrate an orifice that is also on your avatar
+
+You can disable or enable any of these features for one of your toys by setting it to 0 or 1
+
+Example (enable self-touching on lovensehush-0):
+```
+lovensehush-0.touchSelf=1
+```
+
+## Add an idle vibration
+
+Want your toy to vibrate a bit all the time? Set `<deviceId>.idle` between 0 and 1.
+
+Example:
+```
+lovensehush-0.idle=0.1
+```
+
+## Change the vibration scale
+
+**Does it seem like you have to do too much work to make your toy vibrate enough?** Increase the scale.
+
+**Does it seem like your toy is always just on or off with nothing in between?** Decrease the scale.
+
+Setting between 0 and 1, defaults to 1.
+
+Example:
+```
+lovensehush-0.scale=0.8
+```
+
+## Bind a toy to whatever avatar parameter you want
+
+Got a button on your avatar that users can push? Something else wacky? Set `<deviceId>.key` to whatever avatar parameter that you'd like. You can bind to multiple parameters separated by commas.
+
+Note: If you don't want to have normal touch/pen/frot activations on the toy as well, you should set `<deviceId>.type=off`
+
+Example: If you want to vibrate whenever your avatar turns to the right:
+```
+lovensehush-0.key=AngularY
+lovensehush-0.scale=0.0001
+lovensehush-0.linear=1
+```
+
+## Compatibility with VRCFaceTracker and other OSC apps
+
+Only one OSC app can listen to vrchat at a time. To solve this, many apps support a built-in proxy, forwarding messages to each other. In OscGoesBrrr, you can proxy to another application by adding the advanced parameter
+
+```
+osc.proxy=9002
+```
+
+Then, you could launch VRCFaceTracker using cli parameter `--osc=9000:127.0.0.1:9002`.
+
+Alternatively, you can change the port OscGoesBrrr listens to by setting `osc.port` (which defaults to vrchat's broadcast port of 9001).
+
+You can proxy to multiple ports by separating with a comma.
+
+## Vibrate when non-SPS things are touched
+
+Have head pat haptics? Or just want to make something else cause vibrations from people's hands, but it isn't really an orifice or a penetrator?
+
+* Create a new empty object where you want the interaction to happen
+* Add a `VRCFury - Haptic Touch Receiver` component to the new object
+* Give it a name (as it will show up in OscGoesBrrr)
+* Give it a radius (haptics will begin when something touches the outside, and will max out when the center is touched)
+* No OGB configuration is needed. The touch receiver should show up in OGB automatically.
+* If you prefer vibration from motion, rather than proximity to the middle, you might try `all.linear=0` in the OGB settings box. (But beware this will also affect penetration).
+
+## Send penetration amount back to your avatar
+
+You can set a float on your avatar's animator with the value of the highest penetration value currently occurring in OGB. In the Settings box, set `maxLevelParam` to the name of the parameter you'd like to set. Once enabled, it should become visible in the in-game OSC debugger window.
+
+Note that this isn't perfect for animation, since remote users will see the change after a full round-trip of any incoming action, resulting in some delay. A solution such as Poiyomi TPS, which calculates penetration animations locally for each user, may be more suitable for this purpose.
+
+## VRChat Avatar OSC Config Files
+
+By default, OGB will delete all json config files from the VRChat OSC config directory every time they appear. This is because if you upload a new version of an avatar, vrchat will otherwise not update these files, and will thus never send out any additional OSC parameters that you have added. If you wish to disable this feature (not recommended), you can put `keepOscConfigs=1` in the OGB Settings box. Beware that this will likely result in your avatar's OSC updates not being properly reflected in the future. If OGB deleted a config that you customized, and you really want it back, no worries -- it always backs them up first to a subfolder in the VRChat appdata directory named `OSC.bak`.
+
+## Customize Intiface Port
+
+If you have set intiface to use a non-standard port (other than 12345), you can configure OGB to use this port by setting `bio.port` in the Settings box.
+
+## OGB says "Haven't received OSC status recently" even though game is open
+
+You might have some other application (aside from vrchat) using the OSC port on your computer. In this case, the vrchat log file would contain something like:
+
+```
+2022.10.08 15:03:25 Log        -  OSC:: Receiving on 9000, Sending to 127.0.0.1:9001
+2022.10.08 15:03:25 Error      -  [Always] Could not Start OSC: Address already in use
+```
+
+If this happens, and you are unable to find the conflicting application, you can change vrchat and OGB to operate on another port instead.
+
+In your Steam properties for vrchat, add to the launch options: `--osc=9002:127.0.0.1:9003` then restart vrchat
+
+Then in your OGB, in the Settings box, add `osc.port=9003`

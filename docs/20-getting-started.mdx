@@ -1,0 +1,44 @@
+# Getting Started
+
+## 1. Upgrade your avatars with SPS
+
+* Most new intimate avatars and addons already include SPS. If yours does not, you can easily upgrade with the instructions at [Avatar Setup](/avatar)
+* **Your partners will also need SPS in order to trigger your parts.**
+  * If your partners do not have SPS, and do not upgrade their avatar, your parts can still interact with their hands, feet, or head.
+* Don't have an avatar to test with yet? Here's a public avatar with a SFW plug in one hand and SFW socket in the other: [Test Avatar](https://vrchat.com/home/avatar/avtr_892aa406-f2dd-4eab-a779-8e1222ea9d9f)
+
+## 2. Run OscGoesBrrr
+
+* [Download and run OGB](https://osc.toys/download)
+
+> Using mac or linux? OGB hasn't been tested on them, but you can probably clone the repo, make sure nodejs is installed, then `npm install && npm run build && npm start`
+
+## 3. Run Intiface
+
+### Option A. Intiface on your phone
+
+* Download Intiface Central for [Android](https://play.google.com/store/apps/details?id=com.nonpolynomial.intiface_central) or [IOS](https://apps.apple.com/us/app/intiface-central/id6444728067)
+* If using android, enable "Use App Foregrounding" in the Intiface app options, which will allow it to keep working with the screen off
+* If using IOS, currently you must keep the phone on and app in the foreground at all times (sorry! Bug the Intiface discord to fix this :))
+* Make sure your phone is on the same wifi as your computer
+* Run the app, and take note of the `Server Address`
+* In OGB's `Settings` box, put `bio.port=192.168.1.199:12345` (replace the IP address with the server IP shown in the app)
+
+### or Option B. Intiface on your desktop
+
+> The official Lovense Dongle is **not recommended** for OGB. It works, but often has lag issues, especially when using with more than one toy, or toys with more than one motor.
+
+> Bluetooth built into your computer may work, but will likely have poor signal. Dongles are often better, as you can use a USB extension to move them closer to yourself.
+
+* Download the latest version of Intiface Central from https://intiface.com/central/
+* Launch it and click the big play button
+
+## 4. Configure VRChat
+In the main VRChat settings menu, use the search box on the top right to find and set these options:
+* OSC: `On`
+* Avatar Allowed to Interact: `Everyone`
+* Avatar Self Interact: `On`
+
+## 5. You’re done!
+
+When your contacts are active, and are collided with by contacts of the other type, OscGoesBrrr should show an increase in levels, and your toy should activate. If you need help, check out [the discord](https://osc.toys/discord)! For advanced configuration (binding certain toys to certain objects, adjusting intensity, etc) check out [this page](/settings).
