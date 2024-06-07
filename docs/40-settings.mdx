@@ -81,17 +81,8 @@ lovensehush-0.linear=1
 
 ## Compatibility with VRCFaceTracker and other OSC apps
 
-Only one OSC app can listen to vrchat at a time. To solve this, many apps support a built-in proxy, forwarding messages to each other. In OscGoesBrrr, you can proxy to another application by adding the advanced parameter
-
-```
-osc.proxy=9002
-```
-
-Then, you could launch VRCFaceTracker using cli parameter `--osc=9000:127.0.0.1:9002`.
-
-Alternatively, you can change the port OscGoesBrrr listens to by setting `osc.port` (which defaults to vrchat's broadcast port of 9001).
-
-You can proxy to multiple ports by separating with a comma.
+OscGoesBrrr uses OSCQuery, so it will work with VRCFT and other OSC apps without any special configuration required.
+If your OGB says "OSCQuery: Disabled", you may have a special firewall preventing OSCQuery from working properly.
 
 ## Vibrate when non-SPS things are touched
 
