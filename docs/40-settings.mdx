@@ -95,11 +95,11 @@ Have head pat haptics? Or just want to make something else cause vibrations from
 * No OGB configuration is needed. The touch receiver should show up in OGB automatically.
 * If you prefer vibration from motion, rather than proximity to the middle, you might try `all.linear=0` in the OGB settings box. (But beware this will also affect penetration).
 
-## Send penetration amount back to your avatar
+## Send device activation level back to your avatar
 
-You can set a float on your avatar's animator with the value of the highest penetration value currently occurring in OGB. In the Settings box, set `maxLevelParam` to the name of the parameter you'd like to set. Once enabled, it should become visible in the in-game OSC debugger window.
+If you want to animate something based on depth, you should use SPS Depth Animations (see the "Depth Animation" section of the SPS component). This is preferrable, as it is calculated client side, resulting in very little lag.
 
-Note that this isn't perfect for animation, since remote users will see the change after a full round-trip of any incoming action, resulting in some delay. A solution such as Poiyomi TPS, which calculates penetration animations locally for each user, may be more suitable for this purpose.
+If you /must/ use the device activation level from OGB (which is not recommended), you can set a float on your avatar's animator with the value of the highest device level currently occurring in OGB. In the Settings box, set `maxLevelParam` to the name of the parameter you'd like to set. You should add this parameter to your avatar parameters file, with Synced checked.
 
 ## VRChat Avatar OSC Config Files
 
