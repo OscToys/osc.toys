@@ -45,11 +45,24 @@ const config = {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl: 'https://github.com/OscToys/osc.toys/blob/main/',
+          editUrl: 'https://github.com/OscToys/osc.toys/edit/main/',
         },
         theme: {
           customCss: require.resolve('./custom.css'),
         },
+      }),
+    ],
+  ],
+
+  themes: [
+    [
+      require.resolve('@easyops-cn/docusaurus-search-local'),
+      /** @type {import('@easyops-cn/docusaurus-search-local').PluginOptions} */
+      ({
+        hashed: true,
+        indexBlog: false,
+        indexPages: false,
+        docsRouteBasePath: '/',
       }),
     ],
   ],
