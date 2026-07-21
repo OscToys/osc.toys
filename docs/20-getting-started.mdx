@@ -21,24 +21,16 @@
 
 ## 3. Run Intiface
 
-### Option A. Intiface on your phone
-
-* Download Intiface Central for [Android](https://play.google.com/store/apps/details?id=com.nonpolynomial.intiface_central) or [IOS](https://apps.apple.com/us/app/intiface-central/id6444728067)
-* Make sure your phone is on the same wifi as your computer
-* Run the app, and take note of the `Server Address`
-* In OGB, open **Settings**, expand **Intiface**, and enter the server address in **Server Address**
-  * Example: `ws://192.168.1.199:12345`
-  * Note: Sometimes Intiface mobile shows the wrong IP address, and you may need to find your phone's wifi IP address in the wifi options
-
-### or Option B. Intiface on your desktop
-
-> The official Lovense Dongle is **not recommended** for OGB. It works, but often has lag issues, especially when using with more than one device, or devices with more than one motor.
-
-> Bluetooth built into your computer may work, but will likely have poor signal. Dongles are often better, as you can use a USB extension to move them closer to yourself.
-
-* Download the latest version of Intiface Central from https://intiface.com/central/
-* Launch it and click the big play button
-* In OGB, open **Settings** and confirm the **Intiface** section is connected
+* Download Intiface Central for [Android](https://play.google.com/store/apps/details?id=com.nonpolynomial.intiface_central) or [iOS](https://apps.apple.com/us/app/intiface-central/id6444728067) or [PC](https://intiface.com/central/)
+  * **Android or iOS is recommended!** Bluetooth signal on PC is usually worse or broken.
+* If using the mobile app, ensure your phone is on the same wifi as your computer
+* In the Intiface app:
+  * Click the `App Modes` Tab
+  * Enable `Show Advanced/Experimental Settings`
+  * Enable `Broadcast Server Info via mDNS`
+* Ensure that OscGoesBrr shows that intiface is connected, there should be a yellow or green dot
+  * If mDNS doesn't work, you can try entering the server address from the intiface app into OGB's Intiface Address box manually
+  * If manually enterring the address also doesn't work, make sure your phone is on the same network as your computer. If it is, your network may not allow devices to connect directly. In this case, you would be forced to use Intiface for PC.
 
 ## 4. Configure VRChat
 In the main VRChat settings menu, use the search box on the top right to find and set these options:
@@ -55,6 +47,7 @@ In the Shield Levels make sure the following is set:
 ## 5. Link your devices
 
 * Make sure the Intiface and VRChat sections in OGB are green (click them and check the messages if not!)
+* Turn on the device, and Intiface should connect to it automatically
 * When OGB detects connected devices, use the rows in the main settings list to link each device
 * The default SPS links are enough for most setups, so you usually do not need to configure anything else to get started
 
